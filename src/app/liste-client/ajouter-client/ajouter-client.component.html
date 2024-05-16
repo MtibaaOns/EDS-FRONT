@@ -1,0 +1,79 @@
+<mat-card>
+<mat-toolbar color="primary">
+  <h1>Formulaire Client</h1>
+  <span class="exemple-spacer"></span>
+  <button routerLink="/dashboard/liste_client" mat-raised-button color="accent">
+    liste client
+  </button>
+</mat-toolbar>
+
+
+<div class="client-form m-3 p-4">
+  <form [formGroup]="cliForm">
+    <div class="row">
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Nom</mat-label>
+          <input formControlName="nom" matInput placeholder="nom">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+    
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Prénom</mat-label>
+          <input formControlName="prenom" matInput placeholder="prenom">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+    
+      
+        <mat-form-field appearance="fill">
+          <mat-label>raisonSocial</mat-label>
+          <mat-select formControlName="raisonSocial">
+              <mat-option *ngFor="let societe of societes" [value]="societe.raisonSocial">{{ societe.raisonSocial }}</mat-option>
+          </mat-select>
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+      
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input formControlName="email" matInput placeholder="email">
+          <mat-icon matSuffix>mail_outline</mat-icon>
+        </mat-form-field>
+    
+    
+        <mat-form-field appearance="fill">
+          <mat-label>Adresse</mat-label>
+          <input formControlName="adresse" matInput placeholder="adresse">
+        </mat-form-field>
+    
+    
+        <mat-form-field appearance="fill">
+          <mat-label>MF</mat-label>
+          <mat-select formControlName="mf">
+              <mat-option *ngFor="let societe of societes" [value]="societe.mf">{{ societe.mf }}</mat-option>
+          </mat-select>
+      </mat-form-field>
+        
+      <div class="row" *ngIf="!isUpdateActive">
+        <mat-form-field appearance="fill">
+          <mat-label>Login</mat-label>
+          <input matInput formControlName="login">
+        </mat-form-field>
+      </div>
+      <div class="row" *ngIf="!isUpdateActive">
+        <mat-form-field appearance="fill">
+          <mat-label>Entrez votre mot de passe</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Masquer le mot de passe'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+        
+    
+    </div>
+    <div style="margin:2%;text-align: right;">
+    <button *ngIf="!isUpdateActive" (click)="onFormSubmit()" mat-raised-button color="accent">Enregistrer</button>
+    <button *ngIf="isUpdateActive" (click)="modifier()" mat-raised-button color="accent">Modifier</button></div>
+  </form>
+</div>
