@@ -66,6 +66,9 @@ import { AuthentificationComponent } from './login/authentification/authentifica
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListInterventionTechComponent } from './Interventions/list-intervention-tech/list-intervention-tech.component';
 import { ListContratClientComponent } from './Contrat/list-contrat-client/list-contrat-client.component';
+import { ListeInterventionClientComponent } from './Interventions/liste-intervention-client/liste-intervention-client.component';
+import { ListeFactureClientComponent } from './Facture/liste-facture-client/liste-facture-client.component';
+import { ModifierInterventionTechComponent } from './Interventions/modifier-intervention-tech/modifier-intervention-tech.component';
 
 
 
@@ -106,6 +109,9 @@ import { ListContratClientComponent } from './Contrat/list-contrat-client/list-c
     DashboardComponent,
     ListInterventionTechComponent,
     ListContratClientComponent,
+    ListeInterventionClientComponent,
+    ListeFactureClientComponent,
+    ModifierInterventionTechComponent,
   
 
 

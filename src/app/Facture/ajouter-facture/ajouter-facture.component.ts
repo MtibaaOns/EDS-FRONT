@@ -12,7 +12,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 
 import { InterventionService } from '../../Interventions/intervention.service';
 import { Utilisateur } from '../../parametrages/utilisateur/utilisateur';
-
+const today = new Date();
 @Component({
   selector: 'app-ajouter-facture',
   templateUrl: './ajouter-facture.component.html',
@@ -101,12 +101,15 @@ export class AjouterFactureComponent implements OnInit {
     } else {
       if (this.isUpdateActive) {
         this.modifier();
-      } else {
+      }  else {
+        let  aux :Facture=this.factureForm.value;
+        aux.dateN=new Date();
         this.factureService.addFacture(this.factureForm.value).subscribe({
           next: (res: any) => {
             this.toastService.success({ detail: "Succès", summary: "Intervention(s) est facturé avec succès ", duration: 3000 });
             this.updateInterventionsAsFactured();
-            this.router.navigate(['dashboard','/liste_interventions']);
+            this.router.navigate(['dashboard','/liste_facture']);
+         
             this.factureForm.reset();
           },
           error: (error: any) => {

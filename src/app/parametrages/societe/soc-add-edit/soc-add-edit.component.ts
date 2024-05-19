@@ -25,11 +25,11 @@ export class SocAddEditComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Societe
   ) {
     this.socForm = this._fb.group({
-      raisonSocial: ['', [Validators.required, Validators.minLength(3)]],
+      raisonSocial: ['', [Validators.required]],
       adresse: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      tel: ['', [Validators.required, Validators.minLength(10)]],
-      mf: ['', [Validators.required, Validators.minLength(7)]]
+      email: ['', [Validators.required]],
+      tel: ['', [Validators.required]],
+      mf: ['', [Validators.required]]
     });
 
     // Écouter les changements de valeur des champs

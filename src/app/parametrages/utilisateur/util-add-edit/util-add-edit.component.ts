@@ -73,23 +73,35 @@ export class UtilAddEditComponent implements OnInit {
 //   this.utilForm.value.password, this.utilForm.value.role,this.utilForm.value.raisonSocial,
 //   this.utilForm.value.mf, this.utilForm.value.specialite
 update(user: Utilisateur) {
-  if (!this.utilForm.value.password) {
+  if (!user.password) {
     user.password = this.data.password;
-}
-  this.utilisateurService.updateUtilisateur1(user).subscribe({
+  }
+
+  this.utilisateurService.updateUtilisateur(
+    user,
+    user.id,
+    user.nom,
+    user.prenom,
+    user.adresse,
+    user.email,
+    user.tel,
+    user.role,
+    user.raisonSocial,
+    user.mf,
+    user.specialite
+  ).subscribe({
     next: (val: any) => {
       console.log("updated", val);
       alert('Utilisateur modifié avec succès');
       this._dialogRef.close(true);
+      window.location.reload(); // Add this line
     },
-    
     error: (err: any) => {
       console.error(err);
       alert('Erreur lors de la modification de l\'utilisateur : ' + err.message);
     }
   });
 }
-
 onFormSubmit() {
   if (this.utilForm.valid) {
     if (this.data) {
@@ -101,6 +113,7 @@ onFormSubmit() {
         next: (val: any) => {
           alert('Utilisateur ajouté avec succès');
           this._dialogRef.close(true);
+          window.location.reload()
         },
         error: (err: any) => {
           console.error(err);

@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {Component, NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './authGuard/AuthGuard'; // Assuming the AuthGuard file path is correct
 import {AuthentificationComponent} from './login/authentification/authentification.component';
@@ -26,7 +26,11 @@ import { ListeDepotComponent } from './Depot/liste-depot/liste-depot.component';
 import { ListeCauseComponent } from './Cause/liste-cause/liste-cause.component';
 import { ListeCategoriePieceComponent } from './CategoriePiece/liste-categorie-piece/liste-categorie-piece.component';
 import { ListContratClientComponent } from './Contrat/list-contrat-client/list-contrat-client.component';
+import { ListeInterventionClientComponent } from './Interventions/liste-intervention-client/liste-intervention-client.component';
+import { ListeFactureClientComponent } from './Facture/liste-facture-client/liste-facture-client.component';
+import { ModifierInterventionTechComponent } from './Interventions/modifier-intervention-tech/modifier-intervention-tech.component';
 const routes: Routes = [
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: AuthentificationComponent},
   {
     path: 'dashboard',
@@ -49,6 +53,7 @@ const routes: Routes = [
       {path: 'ajouter_intervention', component: AjouterInterventionComponent, canActivate: [AuthGuard]},
       {path: 'liste_interventions', component: ListeInterventionComponent, canActivate: [AuthGuard]},
       {path: 'liste_interventionstech', component: ListInterventionTechComponent, canActivate: [AuthGuard]},
+      {path: 'liste_intervention_client',component:ListeInterventionClientComponent},
       {path: 'update_intervention1/:id', component: AjouterInterventionComponent, canActivate: [AuthGuard]},
       {path: 'update_intervention2/:id', component: AjouterInterventionComponent, canActivate: [AuthGuard]},
 
@@ -65,6 +70,10 @@ const routes: Routes = [
       {path: 'liste_categorie', component: ListeCategoriePieceComponent, canActivate: [AuthGuard]},
 
       {path: 'liste_contrat_client', component: ListContratClientComponent, canActivate: [AuthGuard]},
+      
+      {path: 'liste_facture_client', component: ListeFactureClientComponent, canActivate: [AuthGuard]},
+      { path: 'modifier-intervention-tech/:id', component: ModifierInterventionTechComponent, canActivate: [AuthGuard] }
+    
     ]
   }
 ];

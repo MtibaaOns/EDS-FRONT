@@ -1,1 +1,43 @@
 <app-sidenav></app-sidenav>
+
+
+
+<div *ngIf="role === 'ADMIN' && isActive">
+  <div class="container">
+    <div class="card employee">
+      <div class="text">
+        <h2>Nb Total Contrats</h2>
+        <p>{{ nb }}</p>
+      </div>
+    </div>
+    <div class="card employee">
+        <div class="text">
+          <h2>Montant Toal des contrats</h2>
+          <p>{{ s }}</p>
+        </div>
+      </div>
+
+
+
+    <div class="card clients">
+      <div class="text">
+        <h1>Nb total interventions</h1>
+        <p>{{ nbi }}</p>
+      </div>
+    </div>
+    <div class="card satisfaction">
+      <div class="text">
+        <h2>Satisfaction</h2>
+        <input type="range" id="satisfactionRange" min="0" max="100" [(ngModel)]="satisfaction">
+        <p>{{ satisfaction }}%</p>
+        <p>{{ getSatisfactionEmoji() }}</p> <!-- Ajouter l'emoji ici -->
+      </div>
+    </div>
+    <div class="card jobs">
+      <div class="text">
+        <h2>Nb Total Factures</h2>
+        <p>{{ nbf }}</p>
+      </div>
+    </div>
+  </div>
+</div>

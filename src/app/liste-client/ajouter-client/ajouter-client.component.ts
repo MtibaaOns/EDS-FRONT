@@ -97,7 +97,7 @@ export class AjouterClientComponent implements OnInit  {
     const id = this.clientIdUpdate;
     const {  nom,prenom,adresse,tel,role,email,password,login,mf,raisonSocial,specialite } = client;
   
-    this.clientService.updateUtilisateur(client, id, nom,prenom,adresse,tel,role,email,password,login,mf,raisonSocial,specialite)
+    this.clientService.updateUtilisateur(client, id, nom,prenom,adresse,tel,role,email,password,raisonSocial,specialite)
       .subscribe(res => {
         this.toastService.success({ detail: 'SUCCESS', summary: 'Les détails du client ont été mis à jour avec succès', duration: 3000 });
         this.router.navigate(['dashboard','liste_client']);

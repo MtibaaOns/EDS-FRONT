@@ -1,0 +1,49 @@
+<mat-card>
+    <mat-toolbar color="primary">
+        <h1>Formulaire intervention</h1>
+        <span class="exemple-spacer"></span>
+        <button routerLink="/dashboard/liste_interventions" mat-raised-button color="accent">
+            Liste des interventions
+        </button>
+    </mat-toolbar>
+    <mat-card-content>
+        <div class="intervention-form m-3 p-4">
+            <form [formGroup]="interventionTechForm">
+                <div class="row">
+                 
+                    <mat-form-field appearance="fill">
+                        <mat-label>Durée</mat-label>
+                        <mat-select formControlName="duree">
+                            <mat-option *ngFor="let option of dureeOptions" [value]="option">{{ option }}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="interventionTechForm.get('duree')?.hasError('required')">Ce champ est obligatoire</mat-error>
+                    </mat-form-field>
+
+                  
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Clôturé</mat-label>
+                        <mat-select formControlName="cloturer">
+                            <mat-option [value]="true">Oui</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="interventionTechForm.get('cloturer')?.hasError('required')">Ce champ est obligatoire</mat-error>
+                    </mat-form-field>
+
+                   
+
+                
+                   
+
+    </div>
+
+  
+            </form>
+        </div>
+    </mat-card-content>
+    <mat-card-footer>
+        <div style="margin:2%;text-align: right;">
+           
+            <button *ngIf="isUpdateActive" (click)="modifier()" mat-raised-button color="accent">Modifier</button>
+        </div>
+    </mat-card-footer>
+</mat-card>

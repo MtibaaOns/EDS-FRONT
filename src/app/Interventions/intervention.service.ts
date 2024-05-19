@@ -30,6 +30,13 @@ export class InterventionService {
     return this.http.put<Intervention>(`${this.apiServerUrl}/Interventions/update/${id}?dateDeb=${dateDeb}&dateFin=${dateFin}&duree=${duree}&observation=${observation}&cloturer=${cloturer}&montantHT=${montantHT}&facturer=${facturer}&cause=${cause}&technicien=${technicien}&client=${client}&pieceRechange=${pieceRechange}`, intervention);
   }
 
+  
+ 
+
+  public updateInterventiontech(intervention: Intervention, id: number, duree: string, cloturer: boolean): Observable<Intervention> {
+    return this.http.put<Intervention>(`${this.apiServerUrl}/Interventions/updatetech/${id}?duree=${duree}&cloturer=${cloturer}`, intervention);
+  }
+
   public deleteIntervention(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/Interventions/delete/${id}`);
   }
@@ -38,6 +45,15 @@ export class InterventionService {
     const url = `${this.apiServerUrl}/Interventions/technician/${technician}`;
     console.log('URL de la requête:', url); // Affiche l'URL de la requête dans la console
     return this.http.get<Intervention[]>(url);
+  }
+
+  getInterventionsByClient(client: string): Observable<Intervention[]> {
+    const url = `${this.apiServerUrl}/Interventions/client/${client}`;
+    console.log('URL de la requête:', url); // Affiche l'URL de la requête dans la console
+    return this.http.get<Intervention[]>(url);
+  }
+  public getInterventionsForToday(): Observable<Intervention[]> {
+    return this.http.get<Intervention[]>(`${this.apiServerUrl}/Interventions/today`);
   }
   
 }

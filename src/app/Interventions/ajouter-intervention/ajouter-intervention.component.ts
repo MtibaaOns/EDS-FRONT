@@ -12,7 +12,7 @@ import { Utilisateur } from '../../parametrages/utilisateur/utilisateur';
 import { PieceRechange } from '../../PieceRechange/piece-rechange.model';
 import { IntervPieceService } from '../../IntervPiece/interv-piece.service';
 import { IntervPiece } from '../../IntervPiece/IntervPiece.model';
-
+const today = new Date();
 @Component({
   selector: 'app-ajouter-intervention',
   templateUrl: './ajouter-intervention.component.html',
@@ -120,7 +120,9 @@ export class AjouterInterventionComponent implements OnInit {
 
       if (this.isUpdateActive) {
         this.modifier();
-      } else {
+      }  else {
+        let  aux :Intervention=this.interventionForm.value;
+        aux.date=new Date()
         this.interventionService.addIntervention(this.interventionForm.value).subscribe({
           next: (res: any) => {
             // Enregistrer les données dans la liste IntervPiece
@@ -136,7 +138,7 @@ export class AjouterInterventionComponent implements OnInit {
             });
 
             this.toastService.success({ detail: "Succès", summary: "Intervention ajoutée", duration: 3000 });
-            this.router.navigate(['dashboard','liste_interventions']); // Redirigez vers la liste des interventions
+            this.router.navigate(['/dashboard/liste_interventions']); // Redirigez vers la liste des interventions
             this.interventionForm.reset();
           },
           error: (error: any) => {
@@ -147,6 +149,7 @@ export class AjouterInterventionComponent implements OnInit {
     }
   }
 
+
   modifier() {
     const intervention = this.interventionForm.value;
     const id = this.interventionIdUpdate;
@@ -155,7 +158,7 @@ export class AjouterInterventionComponent implements OnInit {
     this.interventionService.updateIntervention(intervention, id, dateDeb, dateFin, duree, observation, cloturer, montantHT, facturer, cause, technicien, client, pieceRechange)
       .subscribe(res => {
         this.toastService.success({ detail: 'SUCCESS', summary: "Les détails d'intervention ont été mis à jour avec succès", duration: 3000 });
-        this.router.navigate(['liste_interventions']);
+        this.router.navigate(['/dashboard/liste_interventions']);
         this.interventionForm.reset();
       });
   }

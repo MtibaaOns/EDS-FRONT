@@ -30,10 +30,10 @@ export class UtilisateurService {
   
   
   
-    public updateUtilisateur(utilisateur: Utilisateur, id: number, nom: string,prenom: string, adresse: string, email: string, tel: string, password: string,login: string,role: string,raisonSocial:string,mf:string,specialite:string): Observable<Utilisateur> {
+    public updateUtilisateur(utilisateur: Utilisateur, id: number, nom: string,prenom: string, adresse: string, email: string, tel: string,role: string,raisonSocial:string,mf:string,specialite:string): Observable<Utilisateur> {
       // Inclure les paramètres dans le corps de la requête
 
-      return this.http.put<Utilisateur>(`${this.apiServerUrl}/Utilisateur/update/${id}?nom=${nom}&prenom=${prenom}&email=${email}&tel=${tel}&adresse=${adresse}&password=${password}&login=${login}&role=${role}&raisonSocial=${raisonSocial}&mf=${mf}&specialite=${specialite}`, utilisateur);
+      return this.http.put<Utilisateur>(`${this.apiServerUrl}/Utilisateur/update/${id}?nom=${nom}&prenom=${prenom}&email=${email}&tel=${tel}&adresse=${adresse}&role=${role}&raisonSocial=${raisonSocial}&mf=${mf}&specialite=${specialite}`, utilisateur);
     }
     public updateUtilisateur1(utilisateur: Utilisateur): Observable<Utilisateur> {
       // Just send the utilisateur object in the request body

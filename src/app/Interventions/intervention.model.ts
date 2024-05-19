@@ -14,6 +14,6 @@ export interface Intervention {
     client:string
     selected?: boolean;
     pieceRechange:string;
- 
+    date:Date ;
 
   }

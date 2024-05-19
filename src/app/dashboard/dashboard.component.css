@@ -1,0 +1,74 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f9f9f9;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 250px; /* Augmenter la largeur */
+    height: 150px; /* Augmenter la hauteur */
+    padding: 30px; /* Ajuster le padding */
+    margin: 10px;
+}
+
+
+.card .text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.card .text h2 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.card .text p {
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.employee {
+    background-color: #7ED957;
+}
+
+.clients {
+    background-color: #A680FF;
+}
+
+.jobs {
+    background-color: #56CCF2;
+}
+
+.satisfaction {
+    background-color: #ff5507;
+    justify-content: center;
+    height: auto;
+}
+
+.satisfaction input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+}
+
+#satisfactionValue {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+}

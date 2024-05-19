@@ -1,13 +1,13 @@
 export interface Utilisateur{
     id:number;
-      nom:String;
-      prenom:String;
-      email:String;
-      adresse:String;
-      tel:String;
-      login:String;
-      password:String;
-      role:String;
+      nom:string;
+      prenom:string;
+      email:string;
+      adresse:string;
+      tel:string;
+      login:string;
+      password:string;
+      role:string;
       raisonSocial:string;
       mf:string;
       specialite:string;

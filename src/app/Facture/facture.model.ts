@@ -6,7 +6,7 @@ export interface Facture {
     totalHT: number;
     tva: number;
     totalTTC: number;
- 
+    dateN:Date ;
 
 }
 

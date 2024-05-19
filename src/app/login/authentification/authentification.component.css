@@ -1,37 +1,24 @@
-.auth-container {
-    max-width: 300px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #4f60b6;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right,#1f2856,  #415cb4, #5c78d5, #374a7d);
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right , #1f2856, #415cb4, #5c78d5,#374a7d);
+}
+
+
+@media (min-width: 768px) {
+  .gradient-form {
+    height: 100vh !important;
   }
-  
-  .auth-container h2 {
-    text-align: center;
+}
+
+@media (min-width: 769px) {
+  .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
   }
-  
-  .auth-container form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .auth-container input {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-  
-  .auth-container button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  
-  .auth-container button:hover {
-    background-color: #0056b3;
-  }
-  
+}

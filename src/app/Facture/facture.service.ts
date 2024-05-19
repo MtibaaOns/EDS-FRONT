@@ -31,4 +31,12 @@ export class FactureService {
   public deleteFacture(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/Factures/delete/${id}`);
   }
+  getFactureByClient(client: string): Observable<Facture[]> {
+    const url = `${this.apiServerUrl}/Factures/client/${client}`;
+    console.log('URL de la requête:', url); // Affiche l'URL de la requête dans la console
+    return this.http.get<Facture[]>(url);
+  }
+  public getFacturesForToday(): Observable<Facture[]> {
+    return this.http.get<Facture[]>(`${this.apiServerUrl}/Factures/today`);
+  }
 }

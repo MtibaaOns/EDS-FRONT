@@ -8,15 +8,13 @@ import { Router } from '@angular/router';
 import { InterventionService } from '../intervention.service';
 import { NgToastService } from 'ng-angular-popup';
 import { PieceRechange } from '../../PieceRechange/piece-rechange.model';
-import { Utilisateur } from '../../parametrages/utilisateur/utilisateur';
-
 
 @Component({
-  selector: 'app-list-intervention-tech',
-  templateUrl: './list-intervention-tech.component.html',
-  styleUrl: './list-intervention-tech.component.css'
+  selector: 'app-liste-intervention-client',
+  templateUrl: './liste-intervention-client.component.html',
+  styleUrl: './liste-intervention-client.component.css'
 })
-export class ListInterventionTechComponent implements OnInit {
+export class ListeInterventionClientComponent implements OnInit {
   public dataSource!: MatTableDataSource<Intervention>;
   public interventions!: Intervention[];
   pieceRechanges: PieceRechange[] = [];
@@ -34,7 +32,7 @@ export class ListInterventionTechComponent implements OnInit {
     'technicien',
     'client',
     'pieceRechange',
-    'actions',
+    
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -48,14 +46,14 @@ export class ListInterventionTechComponent implements OnInit {
   ngOnInit(): void {
 
       // @ts-ignore
-    this.getInterventionsByTechnician(this.nom);
+    this.getInterventionsByClient(this.nom);
 
   }
   nom = localStorage.getItem('nom')
 
-  getInterventionsByTechnician(nom: string) {
+  getInterventionsByClient(nom: string) {
 
-    this.interventionService.getInterventionsByTechnician(nom)
+    this.interventionService.getInterventionsByClient(nom)
       .subscribe({
         next: (res) => {
           this.interventions = res;
@@ -90,9 +88,7 @@ export class ListInterventionTechComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  
 
-  modifier(id: number) {
-    this.route.navigate(['dashboard','modifier-intervention-tech', id]);
-  }
+  
 }
+

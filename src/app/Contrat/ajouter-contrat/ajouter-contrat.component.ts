@@ -90,6 +90,8 @@ export class AjouterContratComponent implements OnInit {
       if (this.isUpdateActive) {
         this.modifier();
       } else {
+        let  aux :Contrat=this.contratForm.value;
+        aux.date=new Date()
         this.contratService.addContrat(this.contratForm.value).subscribe({
           next: (res: any) => {
             this.toastService.success({ detail: "Succès", summary: "Contrat ajouté", duration: 3000 });

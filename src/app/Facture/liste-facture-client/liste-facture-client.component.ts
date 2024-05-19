@@ -1,46 +1,35 @@
 import {Component, OnInit, ViewChild } from '@angular/core';
-import { Intervention } from '../intervention.model';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Facture } from '../facture.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { InterventionService } from '../intervention.service';
+import { FactureService } from '../facture.service';
 import { NgToastService } from 'ng-angular-popup';
-import { PieceRechange } from '../../PieceRechange/piece-rechange.model';
-import { Utilisateur } from '../../parametrages/utilisateur/utilisateur';
-
 
 @Component({
-  selector: 'app-list-intervention-tech',
-  templateUrl: './list-intervention-tech.component.html',
-  styleUrl: './list-intervention-tech.component.css'
+  selector: 'app-liste-facture-client',
+  templateUrl: './liste-facture-client.component.html',
+  styleUrl: './liste-facture-client.component.css'
 })
-export class ListInterventionTechComponent implements OnInit {
-  public dataSource!: MatTableDataSource<Intervention>;
-  public interventions!: Intervention[];
-  pieceRechanges: PieceRechange[] = [];
+export class ListeFactureClientComponent  implements OnInit {
+  public dataSource!: MatTableDataSource<Facture>;
+  public factures!: Facture[];
+
 
   displayedColumns: string[] = [
     'code',
-    'dateDeb',
-    'dateFin',
-    'duree',
-    'observation',
-    'cloturer',
-    'montantHT',
-    'facturer',
-    'cause',
-    'technicien',
+    'date',
     'client',
-    'pieceRechange',
-    'actions',
+    'totalHT',
+    'tva',
+    'totalTTC',
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private interventionService: InterventionService,
+    private factureservice: FactureService,
     private route: Router,
     private toastService: NgToastService
   ) {}
@@ -48,18 +37,18 @@ export class ListInterventionTechComponent implements OnInit {
   ngOnInit(): void {
 
       // @ts-ignore
-    this.getInterventionsByTechnician(this.nom);
+    this.getFactureByClient(this.nom);
 
   }
   nom = localStorage.getItem('nom')
 
-  getInterventionsByTechnician(nom: string) {
+  getFactureByClient(nom: string) {
 
-    this.interventionService.getInterventionsByTechnician(nom)
+    this.factureservice.getFactureByClient(nom)
       .subscribe({
         next: (res) => {
-          this.interventions = res;
-          this.dataSource = new MatTableDataSource(this.interventions);
+          this.factures = res;
+          this.dataSource = new MatTableDataSource(this.factures);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         },
@@ -90,9 +79,7 @@ export class ListInterventionTechComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  
 
-  modifier(id: number) {
-    this.route.navigate(['dashboard','modifier-intervention-tech', id]);
-  }
+  
 }
+

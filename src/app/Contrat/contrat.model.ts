@@ -7,5 +7,6 @@ export interface Contrat{
     nbInterAnnee:number;
     mtForfaitaire:string;
     client:string;
+    date:Date;
     
 }

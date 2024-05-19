@@ -16,6 +16,14 @@
                             <input matInput type="text" id="code" formControlName="code" [readonly]="true">
                             <mat-error *ngIf="contratForm.get('code')?.hasError('required')">Ce champ est obligatoire</mat-error>
                         </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Client</mat-label>
+                            <mat-select formControlName="client">
+                                <mat-option *ngFor="let client of clients" [value]="client.nom">{{ client.nom }}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="contratForm.get('client')?.hasError('required')">Ce champ est obligatoire</mat-error>
+                        </mat-form-field>
                   
                    
                         <mat-form-field appearance="fill">
@@ -67,13 +75,7 @@
                                 <mat-error *ngIf="contratForm.get('mtForfaitaire')?.hasError('min')">Ce champ ne doit pas être négatif</mat-error>
                             </mat-form-field>
                      
-                        <mat-form-field appearance="fill">
-                            <mat-label>Client</mat-label>
-                            <mat-select formControlName="client">
-                                <mat-option *ngFor="let client of clients" [value]="client.nom">{{ client.nom }}</mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="contratForm.get('client')?.hasError('required')">Ce champ est obligatoire</mat-error>
-                        </mat-form-field>
+                      
                         
                         
                  

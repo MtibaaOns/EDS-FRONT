@@ -30,6 +30,7 @@ export class UtilisateurComponent implements OnInit {
   ngOnInit(): void {
     this.getAllUtilisateur();
   }
+  
 
   openAddEditUtilForm() {
     const DialogRef = this._dialog.open(UtilAddEditComponent);
@@ -82,7 +83,8 @@ export class UtilisateurComponent implements OnInit {
         next: () => {
           this.toastService.success({ detail: "Utilisateur supprimé avec succès", summary: "Succès", duration: 3000 });
           this.getAllUtilisateur();
-     
+          window.location.reload();
+
         },
         error: (error: HttpErrorResponse) => {
           this.toastService.error({ detail: error.message, summary: "Erreur", duration: 3000 });
@@ -100,6 +102,7 @@ export class UtilisateurComponent implements OnInit {
       next: (val) => {
         if (val) {
           this.getAllUtilisateur();
+          window.location.reload();
         }
       }
     });

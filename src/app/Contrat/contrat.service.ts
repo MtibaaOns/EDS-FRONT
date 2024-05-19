@@ -33,4 +33,7 @@ export class ContratService {
   public getContratsByClient(client: string): Observable<Contrat[]> {
     return this.http.get<Contrat[]>(`${this.apiServerUrl}/Contrats/client/${client}`);
   }
+  public getContratsForToday(): Observable<Contrat[]> {
+    return this.http.get<Contrat[]>(`${this.apiServerUrl}/Contrats/today`);
+  }
 }
