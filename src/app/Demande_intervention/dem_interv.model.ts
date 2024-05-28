@@ -1,7 +1,7 @@
 export interface Demande{
     numDem:number;
     code:string;
-    statut:string;
+    client:string;
     titre:string;
     priorite:string
     dateDeb:string;

@@ -17,9 +17,11 @@
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
-                        <mat-label>Statut</mat-label>
-                        <input matInput type="text" formControlName="statut">
-                        <mat-error *ngIf="demandeForm.get('statut')?.hasError('required')">Ce champ est obligatoire</mat-error>
+                        <mat-label>Client</mat-label>
+                        <mat-select formControlName="client">
+                            <mat-option *ngFor="let client of clients" [value]="client.nom">{{ client.nom }}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="demandeForm.get('client')?.hasError('required')">Ce champ est obligatoire</mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">

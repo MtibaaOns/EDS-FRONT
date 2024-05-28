@@ -12,6 +12,8 @@ import { Utilisateur } from '../../parametrages/utilisateur/utilisateur';
 import { PieceRechange } from '../../PieceRechange/piece-rechange.model';
 import { IntervPieceService } from '../../IntervPiece/interv-piece.service';
 import { IntervPiece } from '../../IntervPiece/IntervPiece.model';
+import { DemIntervService } from '../../Demande_intervention/dem-interv.service';
+
 const today = new Date();
 @Component({
   selector: 'app-ajouter-intervention',
@@ -22,7 +24,9 @@ export class AjouterInterventionComponent implements OnInit {
   dureeOptions: string[] = ['30 minutes', '1 heure', '2 heures', '3 heures', '4 heures', '5 heures', '6 heures', '7 heures', '8 heures', '9 heures', '10 heures', '11 heures', '12 heures', '13 heures', '14 heures', '15 heures', '16 heures', '17 heures', '18 heures', '19 heures', '20 heures', '21 heures', '22 heures', '23 heures', '24 heures'];
   causes!: Cause[];
   utilisateurs!: Utilisateur[];
-  clients!: Utilisateur[];
+  clients1!: Utilisateur[];
+  clients: String[] = [];
+  error: string = '';
   pieceRechanges!: PieceRechange[];
   private apiServerUrl = environment.apiBaseUrl;
   interventionForm!: FormGroup;
@@ -43,7 +47,8 @@ export class AjouterInterventionComponent implements OnInit {
     private interventionService: InterventionService,
     private toastService: NgToastService,
     private activateactiveroute: ActivatedRoute,
-    private intervPieceService: IntervPieceService
+    private intervPieceService: IntervPieceService,
+    private demandeService: DemIntervService
 
   ) {}
 
@@ -90,15 +95,32 @@ export class AjouterInterventionComponent implements OnInit {
     this.getUtilisateursByRole('TECH').subscribe(utilisateurs => {
       this.utilisateurs = utilisateurs;
     });
-    this.getUtilisateursByRole('CLIENT').subscribe(clients => {
-      this.clients = clients;
-    });
 
-    this.interventionForm.setValidators(this.validateRange.bind(this));
+    
+    this.getAllClients();
+    
 
-
-
+    this.interventionForm.setValidators(this.validateRange.bind(this))
+    
   }
+
+  getAllClients(): void {
+    this.demandeService.getAllClients().subscribe({
+      next: (response: string[]) => {
+        this.clients = response;
+      },
+      error: (error) => {
+        this.error = 'Failed to load clients. Please try again later.';
+        console.error('Error fetching clients:', error);
+      }
+    });
+  }
+
+
+
+
+
+  
   selectPiecesRechange(pieceRechange: PieceRechange) {
     this.selectedPieceRechange = pieceRechange;
     this.interventionForm.get('pieceRechange')?.setValue(pieceRechange.desPiece);

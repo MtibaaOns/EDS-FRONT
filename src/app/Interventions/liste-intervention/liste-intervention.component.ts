@@ -19,7 +19,7 @@ export class ListeInterventionComponent implements OnInit {
   public interventions!: Intervention[];
   pieceRechanges: PieceRechange[] = [];
 
-  displayedColumns: string[] = ['code', 'dateDeb', 'dateFin', 'duree', 'observation', 'cloturer', 'montantHT', 'facturer', 'cause','technicien','client','pieceRechange', 'actions'];
+  displayedColumns: string[] = ['code', 'dateDeb', 'dateFin', 'duree', 'observation', 'cloturer', 'montantHT', 'facturer', 'cause','technicien','client', 'actions'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -55,7 +55,7 @@ export class ListeInterventionComponent implements OnInit {
   }
 
   modifier(id: number) {
-    this.route.navigate(['update_intervention', id]);
+    this.route.navigate(['dashboard','update_intervention1', id]);
   }
 
   OndeleteIntervention(id: number): void {

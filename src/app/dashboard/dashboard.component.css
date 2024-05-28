@@ -49,15 +49,15 @@ body {
 }
 
 .clients {
-    background-color: #A680FF;
+    background-color: #a18ad6;
 }
 
 .jobs {
-    background-color: #56CCF2;
+    background-color: #69bad5;
 }
 
 .satisfaction {
-    background-color: #ff5507;
+    background-color: #e19d7e;
     justify-content: center;
     height: auto;
 }

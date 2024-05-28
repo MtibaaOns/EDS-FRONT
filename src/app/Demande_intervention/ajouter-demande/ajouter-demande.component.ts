@@ -4,6 +4,11 @@ import { NgToastService } from 'ng-angular-popup';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Demande } from '../dem_interv.model';
 import { DemIntervService } from '../dem-interv.service';
+import { HttpClient } from '@angular/common/http';
+
+import { environment } from '../../../assets/environments/environment';
+import { Observable } from 'rxjs';
+import { Utilisateur } from '../../parametrages/utilisateur/utilisateur';
 
 const today = new Date();
 const month = today.getMonth();
@@ -17,6 +22,8 @@ const year = today.getFullYear();
 export class AjouterDemandeComponent implements OnInit {
   role!: string;
   clientId!: number;
+  clients!: Utilisateur[];
+  private apiServerUrl = environment.apiBaseUrl;
   prioriteOptions: string[] = ["Haute", "Moyenne", "Basse"];
   campaignOne = new FormGroup({
     start: new FormControl(new Date(year, month, 13)),
@@ -32,6 +39,7 @@ export class AjouterDemandeComponent implements OnInit {
   lastCodeNumber: number = 0;
 
   constructor(
+    private http: HttpClient,
     private router: Router,
     private _fb: FormBuilder,
     private demandeService: DemIntervService,
@@ -40,9 +48,10 @@ export class AjouterDemandeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     this.demandeForm = this._fb.group({
       code: ['', Validators.required],
-      statut: ['', Validators.required],
+      client: ['', Validators.required],
       dateDeb: ['', [Validators.required, this.validateDateRange.bind(this)]],
       dateFin: ['', [Validators.required, this.validateDateRange.bind(this)]],
       titre: ['', Validators.required],
@@ -68,6 +77,10 @@ export class AjouterDemandeComponent implements OnInit {
       }
     });
     this.demandeForm.setValidators(this.validateDateRange.bind(this));
+    this.getUtilisateursByRole('CLIENT').subscribe(clients => {
+      this.clients = clients;
+    });
+    
   }
 
   onFormSubmit() {
@@ -81,7 +94,7 @@ export class AjouterDemandeComponent implements OnInit {
       const demande: Demande = {
         numDem: 0, // Ajoutez la propriété numDem avec une valeur par défaut
         code: this.demandeForm.value.code,
-        statut: this.demandeForm.value.statut,
+        client: this.demandeForm.value.client,
         titre: this.demandeForm.value.titre,
         priorite: this.demandeForm.value.priorite,
         dateDeb: this.demandeForm.value.dateDeb,
@@ -110,9 +123,9 @@ export class AjouterDemandeComponent implements OnInit {
   modifier() {
     const demande = this.demandeForm.value;
     const numDem = this.demandeIdUpdate;
-    const { statut, titre, priorite, dateDeb, dateFin, description } = demande;
+    const { client, titre, priorite, dateDeb, dateFin, description } = demande;
 
-    this.demandeService.updateDemande(demande, numDem, statut, titre, priorite, dateDeb, dateFin, description)
+    this.demandeService.updateDemande(demande, numDem, client, titre, priorite, dateDeb, dateFin, description)
       .subscribe(res => {
         this.toastService.success({ detail: 'SUCCESS', summary: 'Les détails du demande ont été mis à jour avec succès', duration: 3000 });
         this.router.navigate(['liste_demande']);
@@ -123,7 +136,7 @@ export class AjouterDemandeComponent implements OnInit {
   fillFormToUpdate(demande: Demande) {
     this.demandeForm.patchValue({
       code: demande.code,
-      statut: demande.statut,
+      client: demande.client,
       titre: demande.titre,
       priorite: demande.priorite,
       dateDeb: demande.dateDeb,
@@ -143,6 +156,9 @@ export class AjouterDemandeComponent implements OnInit {
       const newCode = `dem-${(this.lastCodeNumber + 1).toString().padStart(2, '0')}`;
       this.demandeForm.patchValue({ code: newCode });
     });
+  }
+  getUtilisateursByRole(role: string): Observable<Utilisateur[]> {
+    return this.http.get<Utilisateur[]>(`${this.apiServerUrl}/Utilisateur/role/${role}`);
   }
 
   // Validation personnalisée pour la date de début et de fin

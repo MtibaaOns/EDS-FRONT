@@ -55,7 +55,7 @@ const routes: Routes = [
       {path: 'liste_interventionstech', component: ListInterventionTechComponent, canActivate: [AuthGuard]},
       {path: 'liste_intervention_client',component:ListeInterventionClientComponent},
       {path: 'update_intervention1/:id', component: AjouterInterventionComponent, canActivate: [AuthGuard]},
-      {path: 'update_intervention2/:id', component: AjouterInterventionComponent, canActivate: [AuthGuard]},
+
 
       {path: 'ajouter_facture', component: AjouterFactureComponent, canActivate: [AuthGuard]},
       {path: 'liste_facture', component: ListeFactureComponent, canActivate: [AuthGuard]},

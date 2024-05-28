@@ -21,11 +21,12 @@
   width: 78px;
 }
 .sidebar .logo-details img {
-  height: 100%;
-  width: auto;
+
+  height: 80px;
+  width: 150px;
   border-radius: 50%;
   margin-bottom: 0.01px;/* ou une valeur spécifique, par exemple: 50px */
-    
+  top:20px  
 }
 .sidebar .logo-details{
   height: 60px;

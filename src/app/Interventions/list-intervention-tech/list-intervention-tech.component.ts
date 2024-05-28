@@ -33,7 +33,7 @@ export class ListInterventionTechComponent implements OnInit {
     'cause',
     'technicien',
     'client',
-    'pieceRechange',
+    
     'actions',
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
